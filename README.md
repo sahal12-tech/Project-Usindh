@@ -1,93 +1,94 @@
 # Faculty Website Management System
 
-A database-driven dynamic faculty website designed for managing departments, facilities, teachers, and user profiles with role-based access control.
+A database-driven dynamic faculty website for managing departments, facilities, teachers, and user profiles.
 
-## Project Overview
+## Features
 
-This project implements a fully functional faculty website as part of a Web Engineering assignment. The system includes:
+- Department management (CRUD)
+- Facilities management (Computer Lab, Electronics Lab, Telecommunication Lab, Library)
+- Teacher management with profiles and portfolio display
+- Role-based authentication (Student, Teacher, HoD, Dean)
+- Profile management for all users
+- Responsive design with Bootstrap
+- Secure authentication with password hashing
+- Input validation and sanitization
 
-- **Department Management**: Show, add, delete, update departments
-- **Facilities Management**: Manage Computer Lab, Electronics Lab, Telecommunication Lab, and Library (with book information)
-- **Teacher Management**: Display teacher profiles with pictures and portfolio links
-- **User Authentication**: Role-based registration and login (Student, Teacher, HoD, Dean)
-- **Profile Management**: Users can update their own profiles
-- **Access Control**: Actions performed according to user rights and roles
+## Technology Stack
+
+- PHP 7.4+
+- MySQL 5.7+
+- Bootstrap 5
+- Vanilla JavaScript
+
+## Setup Instructions
+
+1. **Database Setup**:
+   - Import the database schema from `database/schema.sql`
+   - Create a database named `faculty_website`
+   - Import the SQL file to create tables and sample data
+
+2. **Application Configuration**:
+   - Update `config/database.php` with your database credentials
+   - Ensure Apache mod_rewrite is enabled for clean URLs
+
+3. **Deployment**:
+   - Place the entire `faculty_website` directory in your web server's root directory
+   - For XAMPP: `C:\xampp\htdocs\faculty_website`
+   - For WAMP: `C:\wamp64\www\faculty_website`
+   - For MAMP: `/Applications/MAMP/htdocs/faculty_website`
+
+4. **Access**:
+   - Open your browser and go to: `http://localhost/faculty_website`
+   - Register a new account or use default credentials (to be set in database seeders)
 
 ## Project Structure
 
 ```
 faculty_website/
-├── .git/                       # Git repository
-├ .agents/                      # Claude Code skills (symlinked)
-├ .claude/                      # Claude Code configuration
-├ docs_dev/                     # Planning files (AI Maestro methodology)
-│   ├── findings.md             # Research discoveries
-│   ├── progress.md             # Progress tracking
-│   └── task_plan.md            # Task planning and phases
-├ Project_requirements/         # Specifications and documentation
-│   ├── plan/                   # Project planning documents
-│   │   ├── execution_guide.md  # Step-by-step implementation guide
-│   │   ├── plan.md             # Main project plan
-│   │   └── web_engineering_specs.md  # Detailed specifications
-│   └── Web Engr Assignment.pdf # Original assignment (image-based PDF)
-├ skills-lock.json              # Skills inventory
-└ README.md                     # This file
+├── assets/              # CSS, JS, images (source files for development)
+│   ├── css/
+│   ├── js/
+│   └── images/
+├── config/              # Configuration files
+├── controllers/         # Application logic (MVC Controllers)
+├── models/              # Database interactions (MVC Models)
+├── views/               # HTML templates (MVC Views)
+│   ├── layouts/         # Header, footer, sidebar
+│   └── pages/           # Specific page views
+├── public/              # Publicly accessible files
+│   ├── css/             # Compiled/css files
+│   ├── js/              # Compiled/js files
+│   ├── images/          # Public images
+│   └── uploads/         # File uploads (profile pictures, etc.)
+├── core/                # Base classes, helpers
+├── .htaccess            # URL rewriting (Apache)
+├── index.php            # Front controller
+└── README.md            # This file
 ```
 
-## Getting Started
+## Database Design
 
-### Prerequisites
-- PHP 7.4+ 
-- MySQL 5.7+
-- Web server (Apache/Nginx)
-- Composer (if using PHP dependencies)
-- Git
+The system includes the following tables:
+- departments
+- facilities
+- teachers
+- programs
+- users (for authentication)
+- library_books (optional, for detailed book tracking)
 
-### Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/sahal12-tech/Project-Usindh.git
-   cd Project-Usindh
-   ```
+## Security Features
 
-2. Set up your local development environment (XAMPP/WAMP/MAMP/LAMP)
-
-3. Configure database connection in your config files
-
-4. Import the database schema (to be created during development)
-
-5. Run the application on your local server
-
-## Development Approach
-
-This project follows the **AI Maestro Planning Methodology**:
-- **3-File Pattern**: task_plan.md, findings.md, progress.md in `docs_dev/`
-- **6 Rules**: Create plan first, read before decide, update after act, etc.
-- **3-Strike Protocol**: For problem-solving
-- **5-Question Reboot**: For regaining focus when needed
-
-## Features Implemented (Planned)
-
-- [ ] Database design with ER diagram
-- [ ] Department management (CRUD operations)
-- [ ] Facilities management (labs and library)
-- [ ] Teacher management with profiles
-- [ ] Role-based authentication system
-- [ ] Profile management for all user types
-- [ ] Access control based on user roles
-- [ ] Responsive UI using Bootstrap
-- [ ] Comprehensive testing
-- [ ] Documentation
-
-## Contributing
-
-This is an educational project for a Web Engineering assignment. Please refer to the assignment guidelines for contribution requirements.
+- Password hashing using PHP's `password_hash()` and `password_verify()`
+- Prepared statements for all database queries (PDO)
+- Input validation and sanitization
+- Protection against common vulnerabilities (SQL injection, XSS)
 
 ## License
 
-[Specify license if applicable]
+This project is created for educational purposes as part of a Web Engineering assignment.
 
-## Acknowledgments
+## Acknowledgements
 
-- Assignment provided by: Dr. Mumtaz Qabulio
-- Planning methodology: AI Maestro (https://github.com/23blocks-OS/ai-maestro)
+- Based on specifications provided by Dr. Mumtaz Qabulio
+- Built using PHP MVC pattern principles
+- Uses Bootstrap for responsive design

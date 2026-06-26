@@ -69,6 +69,7 @@ Following the **AI Maestro Planning Methodology**:
 5. Create basic project structure following MVC pattern
 
 ## References
+- subagent plan : [subagent_plan.md]
 - Detailed specifications: [web_engineering_specs.md](./web_engineering_specs.md)
 - Research findings: [findings.md](./findings.md)
 - Progress tracking: [progress.md](./progress.md)

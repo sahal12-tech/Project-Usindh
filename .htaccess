@@ -1,0 +1,47 @@
+# .htaccess for Apache URL Rewriting
+# Front controller pattern - sends all requests to index.php
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Prevent direct access to sensitive directories
+    RewriteRule ^(application|system|application/\.*) - [F,L]
+    RewriteRule ^(application|system|\.git|\.htaccess|\.htpasswd|\.env) - [F,L]
+
+    # Prevent direct access to config and core directories
+    RewriteRule ^(config|core) - [F,L,NC]
+
+    # Redirect to index.php if the requested file/directory doesn't exist
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php/$1 [L,QSA]
+</IfModule>
+
+# Prevent directory listing
+Options -Indexes
+
+# Set default charset
+AddDefaultCharset UTF-8
+
+# PHP settings (adjust as needed for your environment)
+<IfModule mod_php5.php>
+    php_value upload_max_filesize 10M
+    php_value post_max_size 10M
+    php_value max_execution_time 30
+    php_value max_input_time 30
+</IfModule>
+
+<IfModule mod_php7.c>
+    php_value upload_max_filesize 10M
+    php_value post_max_size 10M
+    php_value max_execution_time 30
+    php_value max_input_time 30
+</IfModule>
+
+<IfModule mod_php8.c>
+    php_value upload_max_filesize 10M
+    php_value post_max_size 10M
+    php_value max_execution_time 30
+    php_value max_input_time_max 30
+</IfModule>
