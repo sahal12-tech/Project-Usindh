@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "planning": {
+      "source": "davila7/claude-code-templates",
+      "sourceType": "github",
+      "skillPath": "cli-tool/components/skills/ai-maestro/planning/SKILL.md",
+      "computedHash": "c48c2a6914513ec956722cf89e2d72341a344d7ad8a5a3b5f7b9011bc317f214"
+    }
+  }
+}
