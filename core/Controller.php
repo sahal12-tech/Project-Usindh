@@ -12,24 +12,12 @@ class Controller {
      */
     public function model($model) {
         // Require the model file
-        $modelFile = "../models/" . $model . ".php";
-
-        if (file_exists($modelFile)) {
-            require_once $modelFile;
-            return new $model();
-        } else {
-            throw new Exception("Model not found: {$model}");
-        }
-    }
-
-    /**
-     * Load a view
-     * @param string $view Name of the view file (without .php)
+        $modelFile = __DIR__ . '/../models/' . $model . '.php';
      * @param array $data Data to pass to the view
      */
     public function view($view, $data = []) {
-        // Check if the view file exists
-        $viewFile = "../views/" . $view . ".php";
+        // Build absolute path to view file
+        $viewFile = __DIR__ . '/../views/' . $view . '.php';
 
         if (file_exists($viewFile)) {
             // Extract data to variables for easier access in the view
@@ -45,7 +33,7 @@ class Controller {
             $content = ob_get_clean();
 
             // Load the default layout and pass the content to it
-            $layoutFile = "../views/layouts/default.php";
+            $layoutFile = __DIR__ . '/../views/layouts/default.php';
             if (file_exists($layoutFile)) {
                 // Set the content variable for the layout
                 $contentView = $content;
@@ -66,10 +54,9 @@ class Controller {
      */
     public function redirect($url) {
         // Add base URL if not already present
-        if (strpos($url, 'http') !== 0) {
-            $url = BASE_URL . ltrim($url, '/');
+        if (strpos($url, "http") !== 0) {
+            $url = BASE_URL . ltrim($url, "/");
         }
-
         header("Location: " . $url);
         exit;
     }

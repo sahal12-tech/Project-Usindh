@@ -1,9 +1,9 @@
 # .htaccess for Apache URL Rewriting
-# Front controller pattern - sends all requests to index.php
+# Front controller pattern - sends all requests to index.php is in subdirectory /faculty_website/
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /
+    RewriteBase /faculty_website/
 
     # Prevent direct access to sensitive directories
     RewriteRule ^(application|system|application/\.*) - [F,L]
