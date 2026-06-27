@@ -11,6 +11,10 @@ session_start();
 define('BASE_PATH', dirname(__FILE__));
 define('BASE_URL', '/faculty_website/');
 
+// Require base classes
+require_once __DIR__ . '/core/Controller.php';
+require_once __DIR__ . '/core/Model.php';
+
 // Composer autoload if available
 if (file_exists(__DIR__ . '/vendor/autoload.php')) {
     require_once __DIR__ . '/vendor/autoload.php';
@@ -26,28 +30,33 @@ spl_autoload_register(function($class) {
     if (strncmp($prefix, $class, $len) !== 0) {
         // If not namespaced with our prefix, try traditional path
         $file = '';
-        $ns = '';
 
         if (strpos($class, '\\') !== false) {
             // Namespaced class
             $ns = str_replace('\\', '/', $class);
+            $file = $base_dir . $ns . '.php';
         } else {
             // Non-namespaced class - map to appropriate directory
-            if (strpos($class, 'Controller') !== false) {
-                $file = 'controllers/' . $class . '.php';
-            } elseif (strpos($class, 'Model') !== false) {
-                $file = 'models/' . $class . '.php';
+            if ($class === 'Controller' || $class === 'Model') {
+                // Already loaded manually, so skip
+                $file = '';
             } elseif (strpos($class, 'Core') !== false) {
                 $file = 'core/' . $class . '.php';
+            } elseif (substr($class, -10) === 'Controller') { // ends with 'Controller'
+                $file = 'controllers/' . $class . '.php';
+            } else {
+                // Default to models directory for other classes (e.g., User, Department, Teacher)
+                $file = 'models/' . $class . '.php';
             }
 
             if ($file) {
                 $file = __DIR__ . '/' . $file;
-                if (file_exists($file)) {
-                    require_once $file;
-                    return;
-                }
             }
+        }
+
+        if (file_exists($file)) {
+            require_once $file;
+            return;
         }
     }
 });
